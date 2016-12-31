@@ -27,7 +27,11 @@
 						<MenuItem mnemonicParsing="false" onAction="#onOpenUrl"
 							text="果壳" userData="http://www.guokr.com/" />
 						<MenuItem mnemonicParsing="false" onAction="#onOpenUrl"
-							text="博客园" userData="http://kb.cnblogs.com/" />
+							text="RESTful1" userData="file:///E:/git_project/yuanliwei.github.io/src/restful-model/restful-model.html" />
+						<MenuItem mnemonicParsing="false" onAction="#onOpenUrl"
+							text="http://zaole.net/" userData="http://zaole.net/" />
+						<MenuItem mnemonicParsing="false" onAction="#onOpenUrl"
+							text="RESTful3" userData="https://yuanliwei.github.io/" />
 						<MenuItem mnemonicParsing="false" onAction="#onClose"
 							text="Close" />
 					</items>
@@ -49,10 +53,6 @@
 			</menus>
 		</MenuBar>
 	</top>
-	<right>
-		<ListView fx:id="listView" prefWidth="200.0"
-			BorderPane.alignment="CENTER" />
-	</right>
 	<center>
 		<StackPane fx:id="stackPane" prefHeight="150.0" prefWidth="200.0"
 			BorderPane.alignment="CENTER">

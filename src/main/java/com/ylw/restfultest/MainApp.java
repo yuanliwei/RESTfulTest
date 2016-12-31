@@ -64,6 +64,7 @@ public class MainApp extends Application {
 	private void initController() {
 		mainAppController.setMainApp(this);
 		mainViewController.setMainApp(this);
+		mainViewController.load("https://yuanliwei.github.io/src/restful-model/restful-model.html");
 	}
 
 	public static void main(String[] args) {

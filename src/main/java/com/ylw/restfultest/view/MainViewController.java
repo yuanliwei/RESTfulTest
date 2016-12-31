@@ -8,10 +8,12 @@ import com.ylw.restfultest.controller.BaseController;
 import com.ylw.restfultest.controller.JSInterface;
 
 import javafx.concurrent.Worker.State;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebErrorEvent;
 import javafx.scene.web.WebView;
 import netscape.javascript.JSObject;
 
@@ -32,7 +34,7 @@ public class MainViewController extends BaseController {
 	protected void initialize() {
 		// Initialize the person table with the two columns.
 		webEngine = webView.getEngine();
-		jsObj = new JSInterface();
+		jsObj = new JSInterface(mainApp);
 
 		webEngine.setOnError(event -> {
 			System.out.println(event.getMessage());
@@ -51,11 +53,28 @@ public class MainViewController extends BaseController {
 			System.out.println("sssssssss  - " + newState + "   " + window.getMember("jsObj"));
 			window.setMember("jsObj", jsObj);
 			if (newState == State.SUCCEEDED) {
-				exec("onPageLoaded()");
+				 exec("onPageLoaded()");
 			}
-			WebEngine webEngine = new WebEngine();
 		});
+		webEngine.setJavaScriptEnabled(true);
+		webEngine.setOnError(new EventHandler<WebErrorEvent>() {
 
+			@Override
+			public void handle(WebErrorEvent event) {
+				// TODO Auto-generated method stub
+				System.out.println(event.getMessage() + "  - " + event.getSource());
+				System.err.println(event.getException());
+			}
+		});
+		com.sun.javafx.webkit.WebConsoleListener.setDefaultListener(new com.sun.javafx.webkit.WebConsoleListener() {
+
+			@Override
+			public void messageAdded(WebView webView, String message, int lineNumber, String sourceId) {
+				System.out.println("Console: " + message + " [" + sourceId + ":" + lineNumber + "] ");
+
+			}
+
+		});
 	}
 
 	public void setMainApp(MainApp mainApp) {
