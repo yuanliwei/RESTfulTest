@@ -64,7 +64,13 @@ public class MainApp extends Application {
 	private void initController() {
 		mainAppController.setMainApp(this);
 		mainViewController.setMainApp(this);
-		mainViewController.load("https://yuanliwei.github.io/src/restful-model/restful-model.html");
+		mainViewController.load(PropUtils.get("sel_html_path"));
+	}
+	
+	@Override
+	public void stop() throws Exception {
+		PropUtils.store();
+		super.stop();
 	}
 
 	public static void main(String[] args) {

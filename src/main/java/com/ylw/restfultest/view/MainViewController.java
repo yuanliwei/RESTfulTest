@@ -53,7 +53,7 @@ public class MainViewController extends BaseController {
 			System.out.println("sssssssss  - " + newState + "   " + window.getMember("jsObj"));
 			window.setMember("jsObj", jsObj);
 			if (newState == State.SUCCEEDED) {
-				 exec("onPageLoaded()");
+//				 exec("onPageLoaded()");
 			}
 		});
 		webEngine.setJavaScriptEnabled(true);
@@ -71,9 +71,7 @@ public class MainViewController extends BaseController {
 			@Override
 			public void messageAdded(WebView webView, String message, int lineNumber, String sourceId) {
 				System.out.println("Console: " + message + " [" + sourceId + ":" + lineNumber + "] ");
-
 			}
-
 		});
 	}
 
@@ -83,7 +81,6 @@ public class MainViewController extends BaseController {
 
 	public void load(String filePath) {
 		webEngine.load("file:///" + filePath);
-
 	}
 
 	public void exec(String jsData) {

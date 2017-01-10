@@ -79,18 +79,25 @@ public class MainAppController extends BaseController {
 	public void onOpenFile() {
 		log.debug("click open file");
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("打开一个word文档");
-		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Word Files", "*.doc", "*.docx"),
+		fileChooser.setTitle("打开一个html文档");
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("html", "*.htm", "*.html"),
 				new ExtensionFilter("All Files", "*.*"));
 
-		String lastPath = PropUtils.get("last_open_doc_path");
+		String lastPath = PropUtils.get("sel_html_path");
 		if (org.apache.commons.lang3.StringUtils.isNotEmpty(lastPath)) {
+			File file = new File(lastPath);
+			if (file.exists() && file.isFile()) {
+				lastPath = file.getParent();
+			}
 			fileChooser.setInitialDirectory(new File(lastPath));
 		}
 
 		File selectedFile = fileChooser.showOpenDialog(mainApp.primaryStage);
 		if (selectedFile != null) {
-			log.debug("selectFile : " + selectedFile);
+			String openFilePath = selectedFile.getAbsolutePath();
+			log.debug("selectFile : " + openFilePath);
+			mainApp.mainViewController.load(openFilePath);
+			PropUtils.put("sel_html_path", openFilePath);
 		}
 	}
 
